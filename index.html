@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HPV 科普互动</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="container">
+  <section class="page">
+    <h1>守护未来，从了解HPV开始</h1>
+    <p>80%的人一生中可能感染HPV</p>
+    <p>⬇️滑动进入</p>
+  </section>
+
+  <section class="page">
+    <h2>什么是 HPV？</h2>
+    <p>HPV是人乳头瘤病毒，男女都可能感染</p>
+    <p>部分类型可能引发癌症或生殖器疣</p>
+  </section>
+
+  <section class="page">
+    <h2>误区解答</h2>
+    <ul>
+      <li>❌ HPV只和性有关？ → 错！</li>
+      <li>❌ 只有女生需要接种？ → 错！</li>
+      <li>✔️ 疫苗一般安全，副作用极少</li>
+    </ul>
+  </section>
+
+  <!-- ✅ 小游戏页面 -->
+  <section class="page">
+    <h2>小游戏：来挑战一下！</h2>
+    <p>“HPV疫苗只有女生需要接种？”</p>
+    <button class="choice" onclick="checkAnswer(this, false)">✅ 对</button>
+    <button class="choice" onclick="checkAnswer(this, true)">❌ 错</button>
+  </section>
+  <section class="page">
+  <h2>小游戏：HPV感染顺序</h2>
+  <p>请按正确顺序排列👇</p>
+  <ul id="drag-list"></ul>
+  <button onclick="checkOrder()">✅ 提交答案</button>
+  <div id="order-result"></div>
+</section>
+  <section class="page">
+    <h2>疫苗接种指南</h2>
+    <ul>
+      <li>推荐年龄：9-14岁</li>
+      <li>疫苗类型：2价 / 4价 / 9价</li>
+      <li>流程：预约 → 接种 → 完成</li>
+    </ul>
+    <a href="#" class="button">📍 查找接种点</a>
+  </section>
+
+  <section class="page">
+    <h2>真实故事</h2>
+    <p>“我接种了疫苗，是为了自己和家人。”</p>
+  </section>
+
+  <section class="page">
+    <h2>立即行动</h2>
+    <a href="#" class="button">👉 我要预约</a><br><br>
+    <a href="#" class="button" style="background:#555;">📤 分享给朋友</a>
+  </section>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
