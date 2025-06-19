@@ -1,45 +1,89 @@
-* { margin:0; padding:0; box-sizing: border-box; }
-html, body { height:100%; overflow: hidden; font-family: 'Arial', sans-serif; }
-#container { transition: transform 0.5s ease; }
-
-
-ul {
-  list-style: none;
-  padding: 0;
+/* 彻底清除一切外边距、滚动和不必要的缩放行为 */
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-li {
-  list-style: none;
+html, body {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #000;  /* 防止白边背景闪现 */
+  -webkit-overflow-scrolling: touch;
+  touch-action: manipulation;
+}
+
+body {
+  overscroll-behavior: none;
+}
+
+/* container 平滑滑动且限制宽度 */
+#container {
+  width: 100vw;
+  height: 100vh;
+  transition: transform 0.6s ease-in-out;
+  transform: translateY(0);
+}
+
+/* 每一页强制填满整个视口，消除白边 */
+/* 通用页面样式 */
+.page {
+  width: 100vw;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  color: #333;
+  overflow: hidden;
+}
+
+/* 设置具体高度用 JS 控制（防止黑边） */
+
+
+
+
+body {
+  margin: 0;
+  padding: 0;
 }
 
 .page {
-  width:100vw;
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  padding:2rem;
-  transition: transform 0.5s ease;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
-.page:nth-child(odd) { background: #A9D3F2; color: white; }
-.page:nth-child(even) { background: #F2A9CC; color: white; }
-h1, h2, p, li, button { text-align:center; }
-h1 { font-size:2rem; margin-bottom: 1rem; }
-h2 { font-size:1.5rem; margin-bottom:0.5rem; }
-p, li { font-size: 1.1rem; margin-bottom:0.5rem; }
-ul { list-style:none; padding:0; }
-.button, .choice {
-  background:#333; color:white;
-  padding:0.6rem 1rem;
-  border-radius:8px;
-  text-decoration: none;
-  margin:0.5rem 0;
+
+
+/* 1~8 背景图 */
+.page:nth-child(1)  { background-image: url('img/1.png'); }
+.page:nth-child(2)  { background-image: url('img/2.png'); }
+.page:nth-child(3)  { background-image: url('img/3.png'); }
+.page:nth-child(4)  { background-image: url('img/4.png'); }
+.page:nth-child(5)  { background-image: url('img/5.png'); }
+.page:nth-child(6)  { background-image: url('img/6.png'); }
+.page:nth-child(7)  { background-image: url('img/7.png'); }
+.page:nth-child(8)  { background-image: url('img/8.png'); }
+
+/* 游戏页面样式 */
+.page:nth-child(9) {
+  /*background: #000;*/
+  color: #B10055;
 }
-.choice { width: 80%; }
-.correct { background: #28a745 !important; }
-.wrong { background: #dc3545 !important; }
+button {
+  background: #333; color: white;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
 
 #drag-list {
   list-style: none;
@@ -57,16 +101,6 @@ ul { list-style:none; padding:0; }
   cursor: grab;
   user-select: none;
 }
-
-#drag-list li.dragging {
-  opacity: 0.5;
-}
-#order-result {
-  margin-top: 0.8rem;
-  text-align: center;
-  font-size: 1rem;
-}
-
 .drag-ghost {
   position: fixed;
   pointer-events: none;
@@ -83,8 +117,161 @@ ul { list-style:none; padding:0; }
   text-align: center;
   box-sizing: border-box;
 }
+#order-result {
+  margin-top: 0.8rem;
+  font-size: 1rem;
+  color: white;
+}
+
+/* 9~14 背景图 */
+.page:nth-child(10) { background-image: url('img/9.png'); }
+.page:nth-child(11) { background-image: url('img/10.png'); }
+.page:nth-child(12) { background-image: url('img/11.png'); }
+.page:nth-child(13) { background-image: url('img/12.png'); }
+.page:nth-child(14) { background-image: url('img/13.png'); }
+.page:nth-child(15) { background-image: url('img/14.png'); }
+
+/* 冷知识问答页面样式 */
+.page:nth-child(16) {
+  color: #56A646;
+  text-align: left;
+  overflow-y: auto;
+}
+
+.page:nth-child(17) { background-image: url('img/15.png'); }
+.qa {
+  max-width: 800px;
+  padding: 1rem;
+}
+.qa h3 {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  color: #ffd24d;
+}
+.qa p {
+  font-size: 1rem;
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+.quiz {
+  max-width: 800px;
+  width: 90%;
+  text-align: left;
+}
+.question {
+  margin-bottom: 2rem;
+}
+.question h3 {
+  margin-bottom: 0.5rem;
+  color: #ffd24d;
+  font-size: 1.1rem;
+}
+.question button {
+  display: block;
+  width: 100%;
+  margin-bottom: 0.3rem;
+  background: #444;
+  color: #fff;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  text-align: left;
+}
+.question button.correct {
+  background: #28a745;
+}
+.question button.wrong {
+  background: #dc3545;
+}
+.explanation {
+  display: none;
+  color: #ccc;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+#quiz-container button {
+  display: block;
+  width: 100%;
+  margin: 0.5rem 0;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  background: #444;
+  color: white;
+  text-align: left;
+}
+#next-question {
+  background: #28a745;
+  color: white;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  margin-top: 1rem;
+  display: none;
+}
+.correct { background: #28a745 !important; }
+.wrong   { background: #dc3545 !important; }
+.explanation {
+  margin-top: 0.5rem;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+/* 背景图设置 */
+.sort-page {
+  background-image: url('img/sort.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.quiz-page {
+  background-image: url('img/quiz.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 
 
-.drag-ghost li {
-  all: unset;              /* ✅ 移除列表项自带样式 */
+
+/* 居中容器样式 */
+.game-content,
+.quiz-content {
+  padding: 2rem;
+  border-radius: 16px;
+  text-align: center;
+  max-width: 800px;
+  width: 90%;
+}
+
+.sort-page,
+.quiz-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 防止内容太长撑出滚动条 */
+.sort-page ul,
+.quiz-page #quiz-container {
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+/* 第1~3页：浅蓝色 */
+.page:nth-child(-n+3) {
+  background-color: #93A2FF;
+}
+
+/* 第4~9页：浅紫色 */
+.page:nth-child(n+4):nth-child(-n+9) {
+  background-color: #B10055;
+}
+
+/* 第10页及之后：淡灰色 */
+.page:nth-child(n+10) {
+  background-color: #56A646;
+}
+
+
+.page:nth-child(n+17) {
+  background-color: #93A2FF;
 }
